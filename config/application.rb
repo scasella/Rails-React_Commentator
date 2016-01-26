@@ -24,5 +24,7 @@ module Commenter
     config.active_record.raise_in_transactional_callbacks = true
     config.active_record.default_timezone = :local
     config.time_zone = 'Eastern Time (US & Canada)'
+    # config/initializers/react_rails_hot_loader.rb
+
   end
 end

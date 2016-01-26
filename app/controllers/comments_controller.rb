@@ -9,6 +9,10 @@ class CommentsController < ApplicationController
           :csrf_token => form_authenticity_token
         }
       }
+
+      if request.xhr?
+        render :json => Comment.last(5)
+      end
     end
 
     def create

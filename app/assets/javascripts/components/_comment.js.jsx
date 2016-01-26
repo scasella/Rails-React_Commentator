@@ -24,7 +24,6 @@ formatDateTime: function(datetime) {
   }
 
   let finalDate = date.substring(5,7) +"/"+ date.substring(8,10)
-  console.log(finalDate)
   if(addPM == true) {
     let deliverText = finalTime+"PM"+" "+finalDate
     return deliverText

@@ -25,7 +25,6 @@ handleSubmit: function(event) {
   this.refs.text.value = "";
 },
 render: function() {
-  console.log("redered");
   return (
     <div className="well">
 

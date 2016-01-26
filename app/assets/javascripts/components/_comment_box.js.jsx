@@ -1,4 +1,7 @@
 var CommentBox = React.createClass({
+componentDidMount: function() {
+  setInterval(this.refresh, 5000);
+},
 getInitialState: function() {
   return JSON.parse(this.props.presenter);
 },
@@ -13,6 +16,18 @@ handleCommentSubmit: function( formData, action ) {
     }.bind(this)
   });
 },
+refresh: function() {
+  $.ajax({
+      url: "/comments",
+      dataType: "json",
+      success: function(data) {
+        this.setState({ comments: data });
+      }.bind(this),
+      error: function(xhr, status, err) {
+        console.error(xhr, status, err.toString());
+      }.bind(this)
+    });
+},
 render: function() {
   return (
     <div className="col-md-12">
@@ -26,7 +41,7 @@ render: function() {
       <div className="col-md-4">
       <h3>{"\u00a0"}Add a comment</h3>
 
-      <CommentForm form={this.state.form} onCommentSubmit={this.handleCommentSubmit} /> </div>
+      <CommentForm form={this.state.form} refresh={this.refresh} onCommentSubmit={this.handleCommentSubmit} /> </div>
     </div>
   )
 }

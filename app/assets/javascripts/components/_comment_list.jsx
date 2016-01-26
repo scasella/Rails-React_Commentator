@@ -1,9 +1,14 @@
 var CommentList = React.createClass({
-startUp: function() {
-  setInterval(this.checkNew(), 1000);
+getInitialState: function() {
+  return {
+    topCreatedAt: "",
+    startUp: true
+  }
+},
+componentDidMount: function() {
+  setInterval(this.checkNew, 3000);
 },
 render: function() {
-  this.startUp();
   var newArray = this.props.comments;
   newArray.reverse();
   var commentNodes = newArray.map(function(comment) {
@@ -20,14 +25,25 @@ render: function() {
   )
 },
 checkNew: function() {
-  if(this.props.comments.length != commentCount) {
-     document.title = "New Comment!"
-    if(document.hasFocus()) {
-      commentCount = this.props.comments.length
-      document.title = "Elise & Stephen's Chat"
-    }
+  console.log("called")
+  var newArray = this.props.comments;
+  newArray.reverse();
+  if(this.state.startUp == true) {
+        console.log("startup")
+    document.title = "Elise & Stephen's Chat";
+    this.setState({ topCreatedAt: newArray[0].created_at });
+    this.setState({ startUp: false });
+  } else {
+  if(document.hasFocus()) {
+        console.log("has focus")
+    this.setState({ topCreatedAt: newArray[0].created_at })
+    document.title = "Elise & Stephen's Chat"
+  } else {
+    console.log("title called")
+    if(this.state.topCreatedAt != newArray[0].created_at ) {
+      document.title = "New Comment <3"
+   }
   }
-},
+}
+}
 })
-
-var commentCount = 0
