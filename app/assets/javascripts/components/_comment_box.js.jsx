@@ -35,7 +35,7 @@ render: function() {
       <div className="col-md-3"><br /><img className="img-circle" id="picture" src={ this.props.imgSrc } alt={this.props.imgAlt} /></div>
       <div className="col-md-4">
       <br />
-      <CommentList comments={this.state.comments} />
+      <CommentList comments={this.formatArray()} />
       <hr />
       </div>
       <div className="col-md-4">
@@ -44,5 +44,10 @@ render: function() {
       <CommentForm form={this.state.form} refresh={this.refresh} onCommentSubmit={this.handleCommentSubmit} /> </div>
     </div>
   )
+},
+formatArray() {
+  var comments = this.state.comments
+  comments.reverse()
+  return comments
 }
 })
