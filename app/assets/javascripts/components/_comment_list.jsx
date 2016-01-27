@@ -6,7 +6,7 @@ getInitialState: function() {
   }
 },
 componentDidMount: function() {
-  if(this.props.comments.size > 0) {
+  if(this.props.comments.length > 0) {
   setInterval(this.checkNew, 1000);
   }
 },
