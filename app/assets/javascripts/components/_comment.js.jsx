@@ -8,9 +8,9 @@ render: function() {
   }
   return (
      <li className="list-group-item">
-      <span id="badge" className="label label-info">{this.formatDateTime(this.props.time)}</span>
+      <span id="badge" className="label label-default">{this.formatDateTime(this.props.time)}</span>
       <p>{this.loadPic()}{"\u00a0"}{"\u00a0"}{"\u00a0"}{this.props.text}</p>
-      <div id="image-container"><img onError={this.setError} style={this.state.showImg ? null : imgStyle } className="img-thumbnail" id="post-image" src={this.props.image}></img></div>
+      <div id="image-container">{this.checkImg()}</div>
     </li>
   )
 },
@@ -19,9 +19,14 @@ setError: function() {
 },
 loadPic: function() {
   if(this.props.author == "Elise") {
-    return <img className="img-rounded" src="/assets/elisePic.jpg" height="60" width="50"/>
+    return <img className="img-rounded" src={this.props.elisePic} height="60" width="50" />
   } else if(this.props.author == "Stephen") {
-    return <img className="img-rounded" src="/assets/stephenPic.jpg" height="60" width="50"/>
+    return <img className="img-rounded" src={this.props.stephenPic} height="60" width="50" />
+  }
+},
+checkImg: function() {
+  if(this.props.image.length > 5 && this.props.image != null) {
+  return <img onError={this.setError} style={this.state.showImg ? null : imgStyle } className="img-thumbnail" id="post-image" src={this.props.image} />
   }
 },
 formatDateTime: function(datetime) {

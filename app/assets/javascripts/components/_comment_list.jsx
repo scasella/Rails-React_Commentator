@@ -12,8 +12,8 @@ componentDidMount: function() {
 },
 render: function() {
   var commentNodes = this.props.comments.map(function(comment) {
-    return <Comment author={comment.author} image={comment.image} text={comment.text} time={comment.created_at} key={comment.id}/>
-    });
+    return <Comment elisePic={this.props.elisePic} stephenPic={this.props.stephenPic} author={comment.author} image={comment.image} text={comment.text} time={comment.created_at} key={comment.id}/>
+    }.bind(this));
 
   return (
 

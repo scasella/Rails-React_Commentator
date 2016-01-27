@@ -35,7 +35,7 @@ render: function() {
       <div className="col-md-3"><br /><img className="img-circle" id="picture" src={this.props.imgSrc} alt={this.props.imgAlt} /></div>
       <div className="col-md-4">
       <br />
-      <CommentList comments={this.formatArray()} />
+      <CommentList elisePic={this.props.elisePic} stephenPic={this.props.stephenPic} comments={this.formatArray()} />
       <hr />
       </div>
       <div className="col-md-4">
