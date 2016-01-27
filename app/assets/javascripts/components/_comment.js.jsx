@@ -1,12 +1,28 @@
 var Comment = React.createClass({
-
+getInitialState: function() {
+  return { showImg: true }
+},
 render: function() {
+  var imgStyle = {
+    display: 'none'
+  }
   return (
      <li className="list-group-item">
-      <h4>{this.props.author} said:</h4>
-      <p>{this.props.text}</p><span className="badge">{this.formatDateTime(this.props.time)}</span><br />
+      <span id="badge" className="label label-info">{this.formatDateTime(this.props.time)}</span>
+      <p>{this.loadPic()}{"\u00a0"}{"\u00a0"}{"\u00a0"}{this.props.text}</p>
+      <div id="image-container"><img onError={this.setError} style={this.state.showImg ? null : imgStyle } className="img-thumbnail" id="post-image" src={this.props.image}></img></div>
     </li>
   )
+},
+setError: function() {
+  this.setState({ showImg: false })
+},
+loadPic: function() {
+  if(this.props.author == "Elise") {
+    return <img className="img-rounded" src="/assets/elisePic.jpg" height="60" width="50"/>
+  } else if(this.props.author == "Stephen") {
+    return <img className="img-rounded" src="/assets/stephenPic.jpg" height="60" width="50"/>
+  }
 },
 formatDateTime: function(datetime) {
   let time = datetime.substring(11,16)
@@ -28,7 +44,7 @@ formatDateTime: function(datetime) {
     let deliverText = finalTime+"PM"+" "+finalDate
     return deliverText
   } else {
-    let deliverText = finalTime+" "+finalDate
+    let deliverText = finalTime+"AM"+" "+finalDate
     return deliverText
   }
 }

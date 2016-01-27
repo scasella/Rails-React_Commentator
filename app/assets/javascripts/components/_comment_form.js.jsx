@@ -2,7 +2,8 @@ var CommentForm = React.createClass({
 getInitialState: function() {
   return {
     selectedName: "",
-    dropdownTitle: "Who are you?"
+    dropdownTitle: "Who are you?",
+    previewSrc: ""
   }
 },
 handleSubmit: function(event) {
@@ -10,6 +11,7 @@ handleSubmit: function(event) {
 
   var author = this.refs.author.value.trim();
   var text = this.refs.text.value.trim();
+  var image = this.refs.image.value.trim();
 
   //Validate
   if (!text || !author) {
@@ -23,8 +25,13 @@ handleSubmit: function(event) {
   //Reset Form
   this.refs.author.value = "";
   this.refs.text.value = "";
+  this.refs.image.value = "";
+  this.setState({ previewSrc: false })
 },
 render: function() {
+  var imgNoDisplay = {
+    display: 'none'
+  }
   return (
     <div className="well">
 
@@ -33,11 +40,11 @@ render: function() {
     <input type="hidden" className="form-control" name={this.props.form.csrf_param} value={this.props.form.csrf_token} />
     <input type="hidden" ref="author" className="form-control" name="comment[author]" value={this.state.selectedName} placeholder="Your name" />
 
-    <p><input ref="text" onKeyPress={this.keyPressed} className="form-control" name="comment[text]" placeholder={this.introText()} /></p>
+    <p><textarea ref="text" onKeyPress={this.keyPressed} className="form-control" name="comment[text]" placeholder={this.introText()} /></p>
     <p></p><button disabled={this.canPost()} className="btn btn-success" type="submit">Post comment</button>
 
-    {"\u00a0"}{"\u00a0"}<span className="dropdown">
-      <button className="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">{this.state.dropdownTitle}
+    <span style={this.state.selectedName != "" ? imgNoDisplay : null} className="dropdown">
+      {"\u00a0"}{"\u00a0"}<button className="btn btn-warning dropdown-toggle" type="button" data-toggle="dropdown">{this.state.dropdownTitle}
       {"\u00a0"}<span className="caret"></span></button>
       <ul className="dropdown-menu">
         <li onClick={this.setName} id="Elise"><a onClick={this.setName} id="Elise">Elise</a></li>
@@ -45,12 +52,40 @@ render: function() {
       </ul>
     </span>
 
-    </form></div>
+    {"\u00a0"}{"\u00a0"}<button className="btn-sm btn-button-name" disabled={this.imgShow()} data-toggle="collapse" data-target="#demo">Add image</button>
+    <div id="demo" className="collapse">
+      <input ref="image" id="image-field" onChange={this.renderImage} className="form-control input-sm" name="comment[image]" placeholder="Paste image URL..." />
+    </div>
+
+  </form><p></p>
+
+    <div>
+      <img id="post-image" style={this.imgShow() ? null : imgNoDisplay}  src={this.state.previewSrc}></img>
+    </div>
+</div>
+
   )
+},
+imgShow() {
+  if(this.state.previewSrc.length > 0) {
+    return true
+  } else {
+    return false
+  }
+},
+renderImage() {
+  this.setState({ previewSrc: this.refs.image.value })
+},
+imgIsHidden() {
+  if(this.state.previewSrc != "") {
+    return false
+  } else {
+    return true
+  }
 },
 keyPressed(e) {
   this.forceUpdate()
-  if(e.which == 13 && this.canPost()) {
+  if(e.which == 13 && !this.canPost()) {
      this.refs.form.submit()
   }
 },

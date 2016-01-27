@@ -6,11 +6,13 @@ getInitialState: function() {
   }
 },
 componentDidMount: function() {
-  setInterval(this.checkNew, 3000);
+  if(this.props.comments.size > 0) {
+  setInterval(this.checkNew, 1000);
+  }
 },
 render: function() {
   var commentNodes = this.props.comments.map(function(comment) {
-    return <Comment author={comment.author} text={comment.text} time={comment.created_at} key={comment.id} />
+    return <Comment author={comment.author} image={comment.image} text={comment.text} time={comment.created_at} key={comment.id}/>
     });
 
   return (
