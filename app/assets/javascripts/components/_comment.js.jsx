@@ -8,7 +8,7 @@ render: function() {
   }
   return (
      <li className="list-group-item">
-      <span id="badge" className="label label-default">{this.formatDateTime(this.props.time)}</span>
+      <span id="badge"><h6>{this.formatDateTime(this.props.time)}</h6></span>
       <p>{this.loadPic()}{"\u00a0"}{"\u00a0"}{"\u00a0"}<span id="com-text">{this.props.text}</span></p>
       <div id="image-container">{this.checkImg()}</div>
     </li>
