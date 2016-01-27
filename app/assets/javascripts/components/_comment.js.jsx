@@ -25,7 +25,7 @@ loadPic: function() {
   }
 },
 checkImg: function() {
-  if(this.props.image.length > 5 && this.props.image != null) {
+  if(this.props.image) {
   return <img onError={this.setError} style={this.state.showImg ? null : imgStyle } className="img-thumbnail" id="post-image" src={this.props.image} />
   }
 },
