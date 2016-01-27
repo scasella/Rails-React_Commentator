@@ -66,6 +66,9 @@ render: function() {
 
   )
 },
+keyPressed() {
+  this.forceUpdate()
+},
 imgShow() {
   if(this.state.previewSrc.length > 0) {
     return true
