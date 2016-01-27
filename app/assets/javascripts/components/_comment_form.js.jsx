@@ -52,7 +52,7 @@ render: function() {
       </ul>
     </span>
 
-    {"\u00a0"}{"\u00a0"}<button className="btn-sm btn-button-name" disabled={this.imgShow()} data-toggle="collapse" data-target="#demo">Add image</button>
+    {"\u00a0"}{"\u00a0"}<button className="btn-button-name" disabled={this.imgShow()} data-toggle="collapse" data-target="#demo">Add image</button>
     <div id="demo" className="collapse">
       <input ref="image" id="image-field" onChange={this.renderImage} className="form-control input-sm" name="comment[image]" placeholder="Paste image URL..." />
     </div>
