@@ -40,7 +40,7 @@ render: function() {
     <input type="hidden" className="form-control" name={this.props.form.csrf_param} value={this.props.form.csrf_token} />
     <input type="hidden" ref="author" className="form-control" name="comment[author]" value={this.state.selectedName} placeholder="Your name" />
 
-    <p><textarea ref="text" onKeyPress={this.keyPressed} className="form-control" name="comment[text]" placeholder={this.introText()} /></p>
+    <p><input ref="text" onKeyPress={this.keyPressed} className="form-control" name="comment[text]" placeholder={this.introText()} /></p>
     <p></p><button disabled={this.canPost()} className="btn btn-success" type="submit">Post comment</button>
 
     <span style={this.state.selectedName != "" ? imgNoDisplay : null} className="dropdown">
@@ -81,12 +81,6 @@ imgIsHidden() {
     return false
   } else {
     return true
-  }
-},
-keyPressed(e) {
-  this.forceUpdate()
-  if(e.which == 13 && !this.canPost()) {
-     this.refs.form.submit()
   }
 },
 introText() {
