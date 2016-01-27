@@ -4,7 +4,7 @@ getInitialState: function() {
 },
 render: function() {
   return (
-     <li className="list-group-item">
+     <li id="com-li" className="list-group-item">
       <span id="badge"><h6>{this.formatDateTime(this.props.time)}</h6></span>
      <p><span>{this.loadPic()}</span>{"\u00a0"}{"\u00a0"}{"\u00a0"}<span id="com-text">{this.props.text}</span></p>
       <div id="image-container">{this.checkImg()}</div>
