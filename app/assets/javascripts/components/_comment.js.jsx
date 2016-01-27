@@ -3,9 +3,6 @@ getInitialState: function() {
   return { showImg: true }
 },
 render: function() {
-  var imgStyle = {
-    display: 'none'
-  }
   return (
      <li className="list-group-item">
       <span id="badge"><h6>{this.formatDateTime(this.props.time)}</h6></span>
@@ -25,6 +22,9 @@ loadPic: function() {
   }
 },
 checkImg: function() {
+  var imgStyle = {
+    display: 'none'
+  }
   if(this.props.image) {
   return <img onError={this.setError} style={this.state.showImg ? null : imgStyle } className="img-thumbnail" id="post-image" src={this.props.image} />
   }
