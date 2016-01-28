@@ -40,11 +40,9 @@ render: function() {
     <input type="hidden" className="form-control" name={this.props.form.csrf_param} value={this.props.form.csrf_token} />
     <input type="hidden" ref="author" className="form-control" name="comment[author]" value={this.state.selectedName} placeholder="Your name" />
 
-    <p><input ref="text" onKeyPress={this.keyPressed} className="form-control" name="comment[text]" placeholder={this.introText()} /></p>
-    <p></p><button disabled={this.canPost()} className="btn btn-success" type="submit">Post comment</button>
 
     <span style={this.state.selectedName != "" ? imgNoDisplay : null} className="dropdown">
-      {"\u00a0"}{"\u00a0"}<button className="btn btn-warning dropdown-toggle" type="button" data-toggle="dropdown">{this.state.dropdownTitle}
+      <button className="btn btn-warning dropdown-toggle" type="button" data-toggle="dropdown">{this.state.dropdownTitle}
       {"\u00a0"}<span className="caret"></span></button>
       <ul className="dropdown-menu">
         <li onClick={this.setName} id="Elise"><a onClick={this.setName} id="Elise">Elise</a></li>
@@ -52,18 +50,22 @@ render: function() {
       </ul>
     </span>
 
+    <input ref="text" style={this.state.selectedName == "" ? imgNoDisplay : null} onKeyPress={this.keyPressed} className="form-control" name="comment[text]" placeholder={this.introText()} />
+
+    <p /><button disabled={this.canPost()} className="btn btn-success" type="submit">Post comment</button>
+
     {"\u00a0"}{"\u00a0"}<button className="btn btn-button-name" disabled={this.imgShow()} data-toggle="collapse" data-target="#demo">Add image</button>
-    <div id="demo" className="collapse">
+    <span id="demo" className="collapse">
       <input ref="image" id="image-field" onChange={this.renderImage} className="form-control input-sm" name="comment[image]" placeholder="Paste image URL..." />
-    </div>
+    </span>
+
 
   </form><p></p>
 
     <div>
       <img id="post-image" style={this.imgShow() ? null : imgNoDisplay}  src={this.state.previewSrc}></img>
     </div>
-</div>
-
+  </div>
   )
 },
 keyPressed() {
