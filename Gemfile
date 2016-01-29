@@ -42,6 +42,10 @@ gem 'react-rails', '~> 1.0'
 
 gem 'bootstrap-sass', '~> 3.3.6'
 
+source 'https://rails-assets.org' do
+  gem 'rails-assets-react-emoji'
+end
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'

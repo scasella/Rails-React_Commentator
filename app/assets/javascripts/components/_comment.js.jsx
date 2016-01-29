@@ -6,7 +6,7 @@ render: function() {
   return (
      <li id="com-li" className="list-group-item">
       <span id="badge"><h6>{this.formatDateTime(this.props.time)}</h6></span>
-      <p><span>{this.loadPic()}</span>{"\u00a0"}{"\u00a0"}{"\u00a0"}<span id="com-text">{this.props.text}</span></p>
+      <p><span>{this.loadPic()}</span>{"\u00a0"}{"\u00a0"}{"\u00a0"}<span id="com-text">{ReactEmoji.emojify(this.props.text,true,'emojione')}</span></p>
       <div id="image-container">{this.checkImg()}</div>
     </li>
   )

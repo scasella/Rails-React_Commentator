@@ -50,7 +50,7 @@ render: function() {
       </ul>
     </span>
 
-    <input ref="text" style={this.state.selectedName == "" ? imgNoDisplay : null} onKeyPress={this.keyPressed} className="form-control" name="comment[text]" placeholder={this.introText()} autocomplete="off" />
+    <input ref="text" style={this.state.selectedName == "" ? imgNoDisplay : null} onKeyPress={this.keyPressed} className="form-control" name="comment[text]" placeholder={this.introText()} autoComplete="off" />
 
     <p /><button disabled={this.canPost()} className="btn btn-success" type="submit">Post comment</button>
 
