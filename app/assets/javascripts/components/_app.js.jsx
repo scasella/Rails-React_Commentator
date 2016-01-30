@@ -1,4 +1,4 @@
-var CommentBox = React.createClass({
+var App = React.createClass({
 componentDidMount: function() {
   setInterval(this.refresh, 5000);
 },
@@ -30,20 +30,18 @@ refresh: function() {
 },
 render: function() {
   return (
-    <div className="col-md-12">
-      <div className="col-md-1"></div>
-      <div className="col-md-3"><br /><img className="img-circle" id="picture" src={this.props.imgSrc} alt={this.props.imgAlt} /></div>
-      <div className="col-md-4">
-      <br />
-      <CommentList elisePic={this.props.elisePic} stephenPic={this.props.stephenPic} comments={this.formatArray()} />
-      <hr />
+      <div>
+        <div className="col-md-4">
+          <br />
+            <CommentList elisePic={this.props.elisePic} stephenPic={this.props.stephenPic} comments={this.formatArray()} />
+            <hr />
+        </div>
+            <div className="col-md-3">
+          <div id="form-row" className="row">
+          <h4>{"\u00a0"}Add a comment</h4>
+          <CommentForm form={this.state.form} refresh={this.refresh} onCommentSubmit={this.handleCommentSubmit} /></div></div>
       </div>
-      <div className="col-md-4">
-      <h3>{"\u00a0"}Add a comment</h3>
-
-      <CommentForm form={this.state.form} refresh={this.refresh} onCommentSubmit={this.handleCommentSubmit} /> </div>
-    </div>
-  )
+)
 },
 formatArray() {
   var comments = this.state.comments

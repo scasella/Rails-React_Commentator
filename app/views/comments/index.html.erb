@@ -1,3 +1,7 @@
+<div class="col-md-12">
 
-<%= react_component('CommentBox', {
-  :presenter => @presenter.to_json, :imgSrc => image_path("ElisePlusStephen.jpg"), :elisePic => image_path("elisePic.jpg"), :stephenPic => image_path("stephenPic.jpg")}) %>
+<%= react_component('LiveVideos', {:imgSrc => image_path("ElisePlusStephen.jpg")}) %>
+
+<%= react_component('App', {
+  :presenter => @presenter.to_json, :elisePic => image_path("elisePic.jpg"), :stephenPic => image_path("stephenPic.jpg")}) %>
+</div>

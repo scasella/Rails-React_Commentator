@@ -52,7 +52,7 @@ render: function() {
 
     <input ref="text" style={this.state.selectedName == "" ? imgNoDisplay : null} onKeyPress={this.keyPressed} className="form-control" name="comment[text]" placeholder={this.introText()} autoComplete="off" />
 
-    <p /><button disabled={this.canPost()} className="btn btn-success" type="submit">Post comment</button>
+    <p /><button disabled={this.disablePost()} className="btn btn-success" type="submit">Post comment</button>
 
     {"\u00a0"}{"\u00a0"}<button className="btn btn-button-name" disabled={this.imgShow()} data-toggle="collapse" data-target="#demo">Add image</button>
     <span id="demo" className="collapse">
@@ -95,8 +95,8 @@ introText() {
     return "Say something..."
   }
 },
-canPost() {
-  if(this.state.selectedName == "" || this.refs.text.value == "") {
+disablePost() {
+  if(this.state.selectedName == "" || this.refs.text.value == "" && this.refs.image.value.length < 1) {
     return true
   } else {
     return false
