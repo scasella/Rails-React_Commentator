@@ -87,7 +87,7 @@ render: function() {
   )
 },
 emojiClicked(e) {
-  this.refs.text.value = this.refs.text.value + `${e}`
+  this.refs.text.value = this.refs.text.value +" "+ `${e}`
 },
 keyPressed() {
   this.forceUpdate()
