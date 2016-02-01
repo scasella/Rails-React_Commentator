@@ -14,8 +14,8 @@ render() {
       {this.renderView()}
       <br />
       <div>
-      <input ref="search" id="vid-search" className="form-control" autoComplete="off" onChange={this.textEntered}/>
-      {this.renderResult()}
+      {/*<input ref="search" id="vid-search" className="form-control" autoComplete="off" onChange={this.textEntered}/>
+      {this.renderResult()}*/}
     </div>
     <br /><img className="img-circle" id="picture" src={this.props.imgSrc} alt={this.props.imgAlt} />
     </div>

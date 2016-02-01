@@ -29,7 +29,7 @@ handleSubmit: function(event) {
   this.setState({ previewSrc: false })
 },
 render: function() {
-  var imgNoDisplay = {
+  var hiddenStyle = {
     display: 'none'
   }
   return (
@@ -41,7 +41,7 @@ render: function() {
     <input type="hidden" ref="author" className="form-control" name="comment[author]" value={this.state.selectedName} placeholder="Your name" />
 
 
-    <span style={this.state.selectedName != "" ? imgNoDisplay : null} className="dropdown">
+    <span style={this.state.selectedName != "" ? hiddenStyle : null} className="dropdown">
       <button className="btn btn-warning dropdown-toggle" type="button" data-toggle="dropdown">{this.state.dropdownTitle}
       {"\u00a0"}<span className="caret"></span></button>
       <ul className="dropdown-menu">
@@ -50,23 +50,34 @@ render: function() {
       </ul>
     </span>
 
-    <input ref="text" style={this.state.selectedName == "" ? imgNoDisplay : null} onKeyPress={this.keyPressed} className="form-control" name="comment[text]" placeholder={this.introText()} autoComplete="off" />
+    <input ref="text" style={this.state.selectedName == "" ? hiddenStyle : null} onKeyPress={this.keyPressed} className="form-control" name="comment[text]" placeholder={this.introText()} autoComplete="off" />
 
     <p /><button disabled={this.disablePost()} className="btn btn-success" type="submit">Post comment</button>
 
-    {"\u00a0"}{"\u00a0"}<button className="btn btn-button-name" disabled={this.imgShow()} data-toggle="collapse" data-target="#demo">Add image</button>
+    {"\u00a0"}{"\u00a0"}<button className="btn btn-button-name btn-sm" disabled={this.imgShow()} data-toggle="collapse" data-target="#demo">Add image</button>
     <span id="demo" className="collapse">
       <input ref="image" id="image-field" onChange={this.renderImage} className="form-control input-sm" name="comment[image]" placeholder="Paste image URL..." />
     </span>
 
+    <span className="dropdown">
+    <button className="btn btn-warning dropdown-toggle" type="button" data-toggle="dropdown">Emojis
+    {"\u00a0"}<span className="caret"></span></button>
+      <ul id="#emoji-ul"className="dropdown-menu">
+      <EmojiList handleClick={this.emojiClicked} />
+      </ul>
+    </span>
 
   </form><p></p>
 
     <div>
-      <img id="post-image" style={this.imgShow() ? null : imgNoDisplay}  src={this.state.previewSrc}></img>
+      <img id="post-image" style={this.imgShow() ? null : hiddenStyle}  src={this.state.previewSrc}></img>
     </div>
   </div>
   )
+},
+emojiClicked(e) {
+  console.log(e)
+  this.refs.text.value = this.refs.text.value + `${e}`
 },
 keyPressed() {
   this.forceUpdate()
