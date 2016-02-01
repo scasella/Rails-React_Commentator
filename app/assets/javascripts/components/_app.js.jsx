@@ -38,7 +38,7 @@ render: function() {
         </div>
             <div className="col-md-3">
           <div id="form-row" className="row">
-          <h4>{"\u00a0"}Add a comment</h4>
+          <br />
           <CommentForm form={this.state.form} refresh={this.refresh} onCommentSubmit={this.handleCommentSubmit} /></div></div>
       </div>
 )

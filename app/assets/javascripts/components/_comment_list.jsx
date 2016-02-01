@@ -18,7 +18,7 @@ render: function() {
   return (
 
     <div className="comment-list">
-      <ul className="list-group">
+      <ul id="comment-ul" className="list-group">
       { commentNodes }
       </ul>
     </div>

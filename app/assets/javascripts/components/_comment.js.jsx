@@ -25,9 +25,9 @@ checkImg: function() {
   var imgStyle = {
     display: 'none'
   }
-  if(this.props.image) {
+  if(this.props.image != "noImage") {
   return <img onError={this.setError} style={this.state.showImg ? null : imgStyle } className="img-thumbnail" id="post-image" src={this.props.image} />
-  }
+    }
 },
 formatDateTime: function(datetime) {
   let time = datetime.substring(11,16)

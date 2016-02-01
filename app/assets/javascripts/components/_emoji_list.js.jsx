@@ -22,7 +22,7 @@ renderList() {
   } else {
   var newArray = this.state.data.results.collection1.map(function(item) {
     return (
-         <span id="emoji-span" key={item.emoji.alt} className="glyphicon" onClick={() => this.clickFunc(item.emoji.alt)} > {ReactEmoji.emojify(item.emoji.alt, {emojiType: 'emojione', attributes: {width: '25px', height: '25px'}})}</span>
+         <span id="emoji-span" key={item.emoji.alt} className="glyphicon" onClick={() => this.clickFunc(item.emoji.alt)} > {ReactEmoji.emojify(item.emoji.alt, {emojiType: 'emojione', attributes: {width: '28px', height: '28px'}})}</span>
     )
   }.bind(this));
   return (   <li id="emoji-li" className="list-group-item"> {newArray} </li> )
