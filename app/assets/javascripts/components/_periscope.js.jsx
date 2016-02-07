@@ -5,10 +5,8 @@ getInitialState() {
 		hasData: false}
 	)	
 },
-componentDidMount() {
-   this.renderResults()
-},
 render() {
+	setInterval(this.renderResults,5000)
 	return (
 		<div>
 		<h4>Live Videos</h4>
@@ -32,20 +30,14 @@ renderList() {
 	return <div></div>
 },
 renderResults() {
-	const bearerToken = 'AAAAAAAAAAAAAAAAAAAAAB2JkAAAAAAAJkX%2BkhUmnZkaH6gShItQ%2FD6zqek%3DVmMMXuzTqLmOSU4d3TExpklODjcPpL82xgFZlP64vE8iEp8OUd'
 	console.log("test")
-	 $.ajax({
-      url: 'https://api.twitter.com/1.1/statuses/user_timeline.json?count=100&screen_name=twitterapi',
-		contentType: "application/json",
-		dataType: 'jsonp',
-		cache: true, 
-		jsonp : false,
-   		jsonpCallback: 'jsonCallback',
-   		beforeSend : function(xhr) {
-      		xhr.setRequestHeader("Authorization", "Bearer AAAAAAAAAAAAAAAAAAAAAB2JkAAAAAAAJkX%2BkhUmnZkaH6gShItQ%2FD6zqek%3DVmMMXuzTqLmOSU4d3TExpklODjcPpL82xgFZlP64vE8iEp8OUd");
-      },
-      success: function(data) {
-        console.log("test")
+	  const url = "https://api.twitter.com/1.1/statuses/user_timeline.json?count=100&screen_name=twitterapi"
+
+  $.ajax({
+      url: url,
+      dataType: "json",
+       success: function(data) {
+       console.log("test")
       }.bind(this),
       error: function(xhr, status, err) {
         console.error(xhr, status, err.toString());

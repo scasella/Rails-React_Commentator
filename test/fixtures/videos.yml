@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  url: MyString
+  time: MyString
+  poster: MyString
+  watching: 
+
+two:
+  url: MyString
+  time: MyString
+  poster: MyString
+  watching: 
