@@ -40,7 +40,7 @@ render: function() {
           <div id="form-row" className="row">
           <br />
           <CommentForm form={this.state.form} refresh={this.refresh} onCommentSubmit={this.handleCommentSubmit} /></div></div>
-      </div>
+    </div>
 )
 },
 formatArray() {
@@ -49,3 +49,5 @@ formatArray() {
   return comments
 }
 })
+
+var GLOBAL_POSTER = ""

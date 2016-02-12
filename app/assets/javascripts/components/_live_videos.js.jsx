@@ -1,47 +1,71 @@
+{/*  document.getElementById('ytplayer').style.display = "none"*/ }
+
 var LiveVideos = React.createClass({
 getInitialState() {
-  return {data: null,
-  toggle: false,
-  selectedVideo: {}
+  return {
+  data: null,
+  toggleResults: false,
+  selectedVideo: {},
+  initialized: false,
+  broadcastEnabled: false
   }
+},
+interval: "",
+hiddenStyle: {
+  display: 'none'
 },
 render() {
-  if(this.state.toggle == true) {
-  setInterval(this.getVideos,5000)
-  }
   return (
-    <div className="col-md-5">
-      {this.renderView()}
-      <br />
-
-        <input ref="search" id="vid-search" className="form-control" autoComplete="off" onChange={this.textEntered}></input>
-        <div>
-        {this.renderResult()}
+    <div id="center_contents_div" className="col-md-5">
+      <div style={this.toggleVideoLoad() ? this.hiddenStyle : null } className="embed-responsive embed-responsive-16by9">
+        <div id="ytplayer">
+        </div>
       </div>
-    </div>
+      {this.evaluateState()}
+  </div>
   )
 },
-renderView() {
-  if(this.state.selectedVideo.id != null) {
-  const video = this.state.selectedVideo
-  return (
-    <div>
-    <div className="embed-responsive embed-responsive-16by9">
-      <iframe id="movie_player" className="embed-responsive-item" src={"https://www.youtube.com/embed/" + video.id.videoId +"?autoplay=1"} allowFullScreen></iframe>
-    </div>
-    <div className="details">
-       <div><h6 className="text-center">{video.snippet.title}</h6><button type="button" onClick={this.postVideo} className="btn btn-primary">Broadcast</button></div>
-    </div>
-    <br /><img className="img-circle" id="picture" src={this.props.imgSrc} alt={this.props.imgAlt} />
-    </div>
-  )
-  }
+evaluateState() {
+  if(this.state.initialized == false) {
+    return (
+      <div>
+      <img className="img-circle" id="picture" src={this.props.imgSrc} alt={this.props.imgAlt} />
+      <br />
+      <div id="center_contents_div">
+        <button type="button" id="live_button" className="btn btn-button-name" onClick={() => this.setState({ initialized: true })}><span className="glyphicon glyphicon-facetime-video" /></button>
+      </div>
+    </div> )
+
+  } else {
+
+    if(this.state.toggleResults == true) {
+      setInterval(this.getResults,5000)
+    }
+    return (
+        <div id="video-interface">
+            <form ref="form" className="comment-form" action="/videos" acceptCharset="UTF-8" method="post" onSubmit={this.postVideo}>
+          <br />
+          <div id="video-well" className="well">
+          <input ref="search" id="vid-search" className="form-control" autoComplete="off" onChange={this.textEntered}></input>
+          {"\u00a0"}{"\u00a0"}
+            <button id="broadcast_button" disabled={!this.state.broadcastEnabled} className="btn btn-success" type="submit">Broadcast</button> {"\u00a0"}
+            <button id="live_button" type="button" className="btn btn-button-name" onClick={this.triggerLive}>Live</button>
+          </div>
+          {this.renderResults()}
+          <input type="hidden" ref="url" className="form-control" name="video[url]" />
+          <input type="hidden" ref="time" className="form-control" name="video[time]" />
+          <input type="hidden" ref="poster" className="form-control" name="video[poster]" />
+          <input type="hidden" ref="watching" className="form-control" name="video[watching]" />
+          </form>
+        </div>
+     )
+    }
 },
-renderResult() {
+renderResults() {
   if(this.state.data != null) {
   const videoItems = this.state.data.map(function(video) {
     return (
-      <VideoListItem videoSelect={this.handleSelect} key={video.etag} video={video} />
+      <VideoListItem videoSelect={this.handleSelectResult} key={video.etag} video={video} />
     );
   }.bind(this));
 
@@ -52,14 +76,30 @@ renderResult() {
   )
 }
 },
-textEntered() {
-  if(this.refs.search.value.length > 0) {
-  this.setState({ toggle: true })
+toggleVideoLoad() {
+  if(this.state.initialized == true) {
+  const currentVid = player.getVideoUrl()
+  if(`${currentVid}` == 'https://www.youtube.com/watch') {
+    return true
+  } else {
+    return false
+  }
+  } else {
+  return true
 }
 },
-getVideos() {
+exitVideoEnv() {
+  this.setState({ initialized: false });
+  player.pauseVideo()
+},
+textEntered() {
+  if(this.refs.search.value.length > 0) {
+  this.setState({ toggleResults: true })
+}
+},
+getResults() {
   const query = this.refs.search.value
-  const url = "https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=20&q=" + query +"&order=viewCount&regionCode=us&relevanceLanguage=en&type=video&key=AIzaSyAuQCVeNfKhtRk9KlChQPT1nO27DPO_5Ss"
+  const url = "https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=20&q=" + query +"&order=relevance&regionCode=us&relevanceLanguage=en&type=video&key=AIzaSyAuQCVeNfKhtRk9KlChQPT1nO27DPO_5Ss"
 
   $.ajax({
       url: url,
@@ -72,25 +112,59 @@ getVideos() {
       }.bind(this)
     });
 },
-handleSelect: function(video) {
-  this.setState({ selectedVideo: video })
+
+handleSelectResult: function(video) {
+  this.setState({ broadcastEnabled: true })
+  this.setState({ selectedVideo: video });
+  const miniUrl = 'http://www.youtube.com/v/' + `${video.id.videoId}`
+  player.loadVideoByUrl(miniUrl);
+  document.getElementById('ytplayer').style.display = "inline";
 },
-postVideo: function() {
 
-const url = this.state.selectedVideo
-const author = 'Elise'
+assignBroadcastValues() {
+  this.refs.time.value  = `${player.getCurrentTime()}`
+  this.refs.url.value = `${this.state.selectedVideo.id.videoId}`
+  this.refs.poster.value = GLOBAL_POSTER
 
-const ytplayer = document.getElementById("movie_player");
-const seconds = ytplayer.getCurrentTime
-const watching = true
+  this.refs.watching.value = true
+},
 
-var form ={}
-form['url'] = url
-form['author'] = author
-form['seconds'] = seconds
-form['watching'] = watching
+triggerLive() {
+  this.interval = setInterval(this.getVideo, 5000)
+  this.setState({ broadcastEnabled: false })
+},
+getVideo() {
 
-form.serialize
+var tempData = {}
+
+  $.ajax({
+    url: '/videos',
+    type: 'GET',
+    dataType: 'json',
+    async: false,
+    success: function(data) {
+      tempData = data[0]
+    }.bind(this),
+    error: function(xhr, status, err) {
+      console.error(xhr, status, err)
+    }.bind(this)
+  })
+
+if(tempData['poster'] != GLOBAL_POSTER) {
+  if(player.getVideoUrl().search(tempData['url']) == -1 || Math.abs(parseFloat(player.getCurrentTime())  - parseFloat(tempData['time'])) > 10.0 && player.getVideoUrl().search(tempData['url']) != -1 ) {
+    const miniUrl = 'http://www.youtube.com/v/' + tempData['url']
+    player.loadVideoByUrl(miniUrl, parseFloat(tempData['time']))
+    document.getElementById('ytplayer').style.display = "inline";
+    this.forceUpdate()
+  }
+}
+
+},
+postVideo: function(event) {
+this.assignBroadcastValues()
+if(event != null) {
+event.preventDefault() }
+const form = $(this.refs.form).serialize()
 
   $.ajax({
     url: '/videos',
@@ -104,6 +178,7 @@ form.serialize
       console.error(xhr, status, err)
     }.bind(this)
   })
-
+    clearInterval(this.interval)
+    this.interval = setInterval(this.postVideo,15000);
 },
 })

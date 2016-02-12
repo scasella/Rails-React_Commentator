@@ -18,4 +18,5 @@
 //= require components
 //= require bootstrap-sprockets
 //= require react-emoji
+//= require fetch
 //= require_tree .

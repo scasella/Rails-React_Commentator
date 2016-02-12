@@ -1,6 +1,23 @@
 <div class="col-md-12">
 
-<%= react_component('LiveVideos', {:imgSrc => image_path("ElisePlusStephen.jpg")}) %>
+<script>
+var tag = document.createElement('script');
+tag.src = "https://www.youtube.com/iframe_api";
+var firstScriptTag = document.getElementsByTagName('script')[0];
+firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+var player;
+ function onYouTubeIframeAPIReady() {
+   player = new YT.Player('ytplayer', {
+     height: '390',
+     width: '640',
+     videoId: '',
+   });
+
+ }
+
+ </script>
+
+<%= react_component('LiveVideos', {:presenter => @videoPresenter.to_json, :imgSrc => image_path("ElisePlusStephen.jpg")}) %>
 
 <%= react_component('App', {
   :presenter => @presenter.to_json, :elisePic => image_path("elisePic.jpg"), :stephenPic => image_path("stephenPic.jpg")}) %>

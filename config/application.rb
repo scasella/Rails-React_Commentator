@@ -25,7 +25,7 @@ module Commenter
     config.active_record.default_timezone = :local
     config.time_zone = 'Eastern Time (US & Canada)'
     # config/initializers/react_rails_hot_loader.rb
-    
+
 
   end
 end
