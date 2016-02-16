@@ -13,7 +13,7 @@ skip_before_action :verify_authenticity_token
       @video = Video.new(video_params)
       @video.save
 
-      
+      Video.order('id desc').offset(5).destroy_all
 
       if request.xhr?
         render :json => Video.last(1)

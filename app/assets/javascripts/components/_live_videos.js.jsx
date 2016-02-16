@@ -11,6 +11,7 @@ getInitialState() {
   }
 },
 interval: "",
+intervalGetResults: "",
 hiddenStyle: {
   display: 'none'
 },
@@ -26,6 +27,7 @@ render() {
   )
 },
 evaluateState() {
+  clearInterval(this.intervalGetResults)
   if(this.state.initialized == false) {
     return (
       <div>
@@ -37,16 +39,15 @@ evaluateState() {
     </div> )
 
   } else {
-
     if(this.state.toggleResults == true) {
-      setInterval(this.getResults,5000)
+      this.intervalGetResults = setInterval(this.getResults,3000)
     }
     return (
         <div id="video-interface">
             <form ref="form" className="comment-form" action="/videos" acceptCharset="UTF-8" method="post" onSubmit={this.postVideo}>
           <br />
           <div id="video-well" className="well">
-          <input ref="search" id="vid-search" className="form-control" autoComplete="off" onChange={this.textEntered}></input>
+          <input ref="search" id="vid-search" className="form-control" placeholder="Search YouTube..." autoComplete="off" onChange={this.textEntered}></input>
           {"\u00a0"}{"\u00a0"}
             <button id="broadcast_button" disabled={!this.state.broadcastEnabled} className="btn btn-success" type="submit">Broadcast</button> {"\u00a0"}
             <button id="live_button" type="button" className="btn btn-button-name" onClick={this.triggerLive}>Live</button>
@@ -95,9 +96,12 @@ exitVideoEnv() {
 textEntered() {
   if(this.refs.search.value.length > 0) {
   this.setState({ toggleResults: true })
+} else {
+  this.setState({ toggleResults: false })
 }
 },
 getResults() {
+  console.log("results called")
   const query = this.refs.search.value
   const url = "https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=20&q=" + query +"&order=relevance&regionCode=us&relevanceLanguage=en&type=video&key=AIzaSyAuQCVeNfKhtRk9KlChQPT1nO27DPO_5Ss"
 
