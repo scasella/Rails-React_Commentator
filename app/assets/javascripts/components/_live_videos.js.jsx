@@ -32,7 +32,7 @@ broadcastBtnToggle: {
 },
 render() {
   return (
-    <div id="center_contents_div" className="col-md-5">
+    <div>
       <div style={this.toggleVideoLoad() ? this.hiddenStyle : null } className="embed-responsive embed-responsive-16by9">
         <div id="ytplayer">
         </div>
@@ -48,13 +48,13 @@ evaluateState() {
       <img className="img-circle" id="picture" src={this.props.imgSrc} alt={this.props.imgAlt} />
       <br />
       <div id="center_contents_div">
-        <button type="button" style={GLOBAL_POSTER == "" ? this.hiddenStyle : null} id="enter_vid_button" className="btn btn-button-name" onClick={() => this.setState({ initialized: true })}><span className="glyphicon glyphicon-facetime-video" /></button>
+        <button type="button" style={GLOBAL_POSTER == "" ? this.hiddenStyle : null} id="enter_vid_button" className="btn btn-sm btn-button-name" onClick={() => this.setState({ initialized: true })}><span className="glyphicon glyphicon-facetime-video" /></button>
       </div>
     </div> )
 
   } else {
     return (
-        <div id="video-interface">
+        <div>
             <form ref="form" className="comment-form" action="/videos" acceptCharset="UTF-8" method="post" onSubmit={this.postVideo}>
           <br />
           <div id="video-well" className="well">
@@ -102,7 +102,6 @@ toggleVideoLoad() {
   }
 },
 exitVideoEnv() {
-
   clearInterval(this.intervalGet)
   clearInterval(this.intervalGetResults)
   this.intervalGet = null
@@ -148,7 +147,8 @@ handleSelectResult: function(video) {
 triggerLive() {
   clearInterval(this.intervalPost)
   this.intervalPost = null
-  this.intervalGet = setInterval(this.getVideo, 5000)
+  clearInterval(this.intervalGet)
+  this.intervalGet = setInterval(this.getVideo, 3000)
   this.setState({ broadcastEnabled: false })
 },
 getVideo() {
@@ -171,11 +171,15 @@ if(tempData['watching'] != false) {
   if(tempData['poster'] != GLOBAL_POSTER) {
     if(player.getVideoUrl().search(tempData['url']) == -1 || Math.abs(parseFloat(player.getCurrentTime())  - parseFloat(tempData['time'])) > 5.0 && player.getVideoUrl().search(tempData['url']) != -1 ) {
       const miniUrl = 'http://www.youtube.com/v/' + tempData['url']
-      player.loadVideoByUrl(miniUrl, (parseFloat(tempData['time']) + 2.0))
+      player.loadVideoByUrl(miniUrl, parseFloat(tempData['time']))
       document.getElementById('ytplayer').style.display = "inline";
       this.forceUpdate()
     }
   }
+} else {
+  clearInterval(this.intervalGet)
+  this.intervalGet = null
+  player.pauseVideo()
 }
 },
 
@@ -213,6 +217,11 @@ postVideo: function(event, exiting = null) {
       clearInterval(this.intervalPost)
       this.intervalPost = setInterval(this.postVideo,10000);
     }
+
+    if(exiting == true && this.intervalPost == null) {
+      clearInterval(this.intervalPost)
+      return
+    } else {
     const form = $(this.refs.form).serialize()
     $.ajax({
       url: '/videos',
@@ -220,13 +229,17 @@ postVideo: function(event, exiting = null) {
       type: 'POST',
       dataType: 'json',
       success: function(data) {
-        console.log(data)
+        console.log("cla")
       }.bind(this),
       error: function(xhr, status, err) {
       console.error(xhr, status, err)
       }.bind(this)
     })
-
+    if(exiting == true) {
+      clearInterval(this.intervalPost)
+      this.intervalPost = null
+    }
     this.forceUpdate()
+    }
 },
 })

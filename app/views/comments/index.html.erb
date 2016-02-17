@@ -1,4 +1,4 @@
-<div class="col-md-12">
+
 
 <script>
 var tag = document.createElement('script');
@@ -16,9 +16,10 @@ var player;
  }
 
  </script>
+<div class="col-md-12">
+  <div id="center_contents_div" class="col-md-5">
+    <%= react_component('LiveVideos', {:presenter => @videoPresenter.to_json, :imgSrc => image_path("ElisePlusStephen.jpg")}) %>
+  </div>
 
-<%= react_component('LiveVideos', {:presenter => @videoPresenter.to_json, :imgSrc => image_path("ElisePlusStephen.jpg")}) %>
-
-<%= react_component('App', {
-  :presenter => @presenter.to_json, :elisePic => image_path("elisePic.jpg"), :stephenPic => image_path("stephenPic.jpg")}) %>
+  <%= react_component('App', {:presenter => @presenter.to_json, :elisePic => image_path("elisePic.jpg"), :stephenPic => image_path("stephenPic.jpg")}) %>
 </div>

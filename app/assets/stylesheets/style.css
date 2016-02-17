@@ -170,12 +170,13 @@ border-color: transparent;
 #enter_vid_button {
 /* Rectangle 1: */
 background: #65429C;
-width: 65px
+padding: 4px, 6px, 4px, 6px;
+width: 50px
 }
 #enter_vid_button:hover {
 background: #422b66;
 color: white
 }
 .glyphicon-facetime-video {
-  font-size: 18px
+  font-size: 14px
 }
