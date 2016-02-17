@@ -58,9 +58,9 @@ evaluateState() {
             <form ref="form" className="comment-form" action="/videos" acceptCharset="UTF-8" method="post" onSubmit={this.postVideo}>
           <br />
           <div id="video-well" className="well">
-          <input ref="search" id="vid-search" className="form-control input-sm" placeholder="Search YouTube..." autoComplete="off" onChange={this.textEntered}></input>{"\u00a0"}
-            <button id="broadcast_button" style={this.intervalPost == null ? null : this.broadcastBtnToggle} disabled={!this.state.broadcastEnabled} className="btn btn-success btn-sm" type="submit">{this.intervalPost == null ? 'Broadcast' : 'Broadcasting'}</button>{"\u00a0"}
-            <button id="live_button" type="button" className="btn btn-sm btn-button-name" onClick={this.triggerLive}>Watch Live</button>{"\u00a0"}
+          <input ref="search" id="vid-search" className="form-control" placeholder="Search YouTube..." autoComplete="off" onChange={this.textEntered}></input>{"\u00a0"}{"\u00a0"}
+            <button id="broadcast_button" style={this.intervalPost == null ? null : this.broadcastBtnToggle} disabled={!this.state.broadcastEnabled} className="btn btn-success btn-sm" type="submit">{this.intervalPost == null ? 'Broadcast' : 'Broadcasting'}</button>{"\u00a0"}{"\u00a0"}
+            <button id="live_button" type="button" className="btn btn-sm btn-button-name" onClick={this.triggerLive}>Watch Live</button>{"\u00a0"}{"\u00a0"}
             <button type="button" className="btn btn-xs btn-danger" onClick={this.exitVideoEnv}><b>X</b></button>
 
           </div>
