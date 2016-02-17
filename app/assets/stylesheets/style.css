@@ -66,7 +66,7 @@ min-width: 350px;
 height: auto
 }
 #vid-search {
-width: 175px;
+width: 125px;
 display: inline;
 position:relative;
 
@@ -112,7 +112,7 @@ overflow-y: auto;
 #live_button {
 /* Rectangle 1: */
 background: #65429C;
-width: 80px
+width: 85px
 }
 #live_button:hover {
 background: #422b66;
@@ -166,4 +166,16 @@ border-color: transparent;
   position: relative;
   top: 4px;
   color: red
+}
+#enter_vid_button {
+/* Rectangle 1: */
+background: #65429C;
+width: 65px
+}
+#enter_vid_button:hover {
+background: #422b66;
+color: white
+}
+.glyphicon-facetime-video {
+  font-size: 18px
 }

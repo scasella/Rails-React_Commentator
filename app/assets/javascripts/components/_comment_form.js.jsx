@@ -40,7 +40,7 @@ render: function() {
     <div>
 
       <span style={this.state.selectedName != "" ? this.hiddenStyle : null} className="dropdown">
-        <button id="login-btn" className="btn btn-primary dropdown-toggle btn-lg" type="button" data-toggle="dropdown">{this.state.dropdownTitle}
+        <button id="login-btn" className="btn btn-info dropdown-toggle btn-lg" type="button" data-toggle="dropdown">{this.state.dropdownTitle}
           {"\u00a0"}<span className="caret"></span></button>
         <br />
         <ul className="dropdown-menu">
