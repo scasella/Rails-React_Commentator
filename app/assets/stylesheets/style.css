@@ -184,6 +184,6 @@ text-align: center
   max-width: 500px;
   max-height: 500px
 }
-.img-thumbnail {
-  max-width: 80%;
+#comment-img {
+  max-width: 75%;
 }
