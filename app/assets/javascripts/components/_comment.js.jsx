@@ -26,7 +26,7 @@ checkImg: function() {
     display: 'none'
   }
   if(this.props.image != "noImage") {
-  return <img onError={this.setError} onClick={() => this.launchModal()} data-toggle="modal" data-target="#myModal" style={this.state.showImg ? null : imgStyle } className="img-thumbnail" id="post-image" src={this.props.image} />
+  return <img id="comment-img" onError={this.setError} onClick={() => this.launchModal()} data-toggle="modal" data-target="#myModal" style={this.state.showImg ? null : imgStyle } className="img-thumbnail" src={this.props.image} />
   }
 },
 launchModal() {
