@@ -184,3 +184,6 @@ text-align: center
   max-width: 500px;
   max-height: 500px
 }
+.img-thumbnail {
+  max-width: 325px;
+}
