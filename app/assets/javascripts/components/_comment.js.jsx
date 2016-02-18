@@ -26,8 +26,12 @@ checkImg: function() {
     display: 'none'
   }
   if(this.props.image != "noImage") {
-  return <img onError={this.setError} style={this.state.showImg ? null : imgStyle } className="img-thumbnail" id="post-image" src={this.props.image} />
-    }
+  return <img onError={this.setError} onClick={() => this.launchModal()} data-toggle="modal" data-target="#myModal" style={this.state.showImg ? null : imgStyle } className="img-thumbnail" id="post-image" src={this.props.image} />
+  }
+},
+launchModal() {
+  GLOBAL_IMG = `${this.props.image}`
+  GLOBAL_POST_TEXT = this.props.text
 },
 formatDateTime: function(datetime) {
   let time = datetime.substring(11,16)

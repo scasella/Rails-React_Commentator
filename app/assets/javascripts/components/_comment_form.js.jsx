@@ -20,7 +20,7 @@ handleSubmit: function(event) {
   }
 
   //Validate
-  if (!text || !author) {
+  if (!author) {
     return false;
   }
 
@@ -70,10 +70,10 @@ render: function() {
           </ul>
           </span>
 
-          {"\u00a0"}{"\u00a0"}<button id="img_button" style={this.state.selectedName != "" ? null : this.hiddenStyle} className="btn btn-button-name" disabled={this.imgShow()} type="button" data-toggle="collapse" data-target="#demo"><span className="glyphicon glyphicon-picture" /></button>
-          <span id="demo" className="collapse">
+          {"\u00a0"}{"\u00a0"}<button type="button" id="img_button" style={this.state.selectedName != "" ? null : this.hiddenStyle} className="btn btn-info" disabled={this.imgShow()} data-toggle="collapse" data-target="#demo"><span className="glyphicon glyphicon-picture" /></button>
+        <div id="demo" className="collapse">
             <input ref="image" id="image-field" onChange={this.renderImage} className="form-control input-sm" name="comment[image]" placeholder="Paste image URL..." />
-          </span>
+          </div>
 
         </form>
         <p />

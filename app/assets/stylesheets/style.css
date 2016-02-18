@@ -28,10 +28,7 @@ margin-left: 5px
   text-align: right;
 }
 div > #post-image {
-  width: auto;
-  height: auto;
-  max-height: 250px;
-  max-width: 350px;
+  max-width: 100%
 }
 .btn-button-name, .btn-button-name:link, .btn-button-name:visited {
   background-color: #51C1DB;
@@ -127,7 +124,7 @@ background: #1DB954;
 border-color: transparent;
 }
 #post_button:hover {
-background: #bbeacb;
+background: #60ce87;
 border-color: transparent;
 }
 #post_button:disabled {
@@ -179,4 +176,11 @@ color: white
 }
 .glyphicon-facetime-video {
   font-size: 14px
+}
+.modal-dialog {
+text-align: center
+}
+#modal-img {
+  max-width: 500px;
+  max-height: 500px
 }
