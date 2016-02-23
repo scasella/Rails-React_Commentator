@@ -13,7 +13,7 @@ class CommentsController < ApplicationController
       @comments = Comment.order(:created_at)
       respond_to do |format|
         format.html
-        format.json
+        format.js
         format.csv { send_data @comments.as_csv }
       end
 
