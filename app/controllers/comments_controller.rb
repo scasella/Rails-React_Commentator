@@ -10,6 +10,12 @@ class CommentsController < ApplicationController
         }
       }
 
+      @comments = Comment.order(:created_at)
+      respond_to do |format|
+        format.html
+        format.csv { send_data @comments.as_csv }
+      end
+
       if request.xhr?
         render :json => Comment.last(50)
       end
