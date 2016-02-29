@@ -46,10 +46,12 @@ evaluateState() {
     return (
       <div>
       <img className="img-circle" id="picture" src={this.props.imgSrc} alt={this.props.imgAlt} />
+      <ul style={GLOBAL_POSTER == "" ? this.hiddenStyle : null} className="nav nav-tabs">
+        <li className="active"><a href="#">Kibby</a></li>
+        <li><a onClick={() => this.setState({ initialized: true })} href="#">Live Stream</a></li>
+      </ul>
       <br />
-      <div id="center_contents_div">
-        <button type="button" style={GLOBAL_POSTER == "" ? this.hiddenStyle : null} id="enter_vid_button" className="btn btn-sm btn-button-name" onClick={() => this.setState({ initialized: true })}><span className="glyphicon glyphicon-facetime-video" /></button>
-      </div>
+      {GLOBAL_POSTER == "" ? null : this.atlasSlideshow()}
     </div> )
 
   } else {
@@ -73,6 +75,74 @@ evaluateState() {
         </div>
      )
     }
+},
+atlasSlideshow() {
+  return (<div id="slideshow-well" className="well">
+    <div id="myCarousel" className="carousel slide" data-ride="carousel">
+    <ol id="controls" className="carousel-indicators">
+      <li data-target="#myCarousel" data-slide-to="0" className="active"></li>
+      <li data-target="#myCarousel" data-slide-to="1"></li>
+      <li data-target="#myCarousel" data-slide-to="2"></li>
+      <li data-target="#myCarousel" data-slide-to="3"></li>
+      <li data-target="#myCarousel" data-slide-to="4"></li>
+      <li data-target="#myCarousel" data-slide-to="5"></li>
+      <li data-target="#myCarousel" data-slide-to="6"></li>
+      <li data-target="#myCarousel" data-slide-to="7"></li>
+      <li data-target="#myCarousel" data-slide-to="8"></li>
+      <li data-target="#myCarousel" data-slide-to="9"></li>
+    </ol>
+    <div className="carousel-inner" role="listbox">
+      <div className="item active">
+        <img id="item-img" src={this.props.k1} />
+      </div>
+
+      <div className="item">
+        <img id="item-img" src={this.props.k2} />
+      </div>
+
+      <div className="item">
+        <img id="item-img" src={this.props.k3} />
+      </div>
+
+      <div className="item">
+        <img id="item-img" src={this.props.k4} />
+        </div>
+
+      <div className="item">
+        <img src={this.props.k5} />
+      </div>
+
+      <div className="item">
+        <img src={this.props.k6} />
+      </div>
+
+      <div className="item">
+        <img src={this.props.k7} />
+      </div>
+
+      <div className="item">
+        <img src={this.props.k8} />
+      </div>
+
+      <div className="item">
+        <img src={this.props.k9} />
+      </div>
+
+      <div className="item">
+        <img src={this.props.k10} />
+      </div>
+    </div>
+
+    <a id="controls" className="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+      <span className="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+      <span className="sr-only">Previous</span>
+    </a>
+    <a id="controls" className="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+      <span className="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+      <span className="sr-only">Next</span>
+    </a>
+  </div>
+</div>)
 },
 renderResults() {
   if(this.state.data != null) {

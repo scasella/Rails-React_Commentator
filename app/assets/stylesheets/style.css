@@ -12,12 +12,12 @@ div {
 }
 #form-row {
 margin-left: 5px
-
 }
 #picture {
   display: block;
   margin-left: auto;
-  margin-right: auto
+  margin-right: auto;
+  box-shadow: inset 6px 8px 17px -2px rgba(0,0,0,0.36);
 }
 #badge {
   color: #C1C1C1;
@@ -72,18 +72,11 @@ position:relative;
 
 }
 #vid-list {
-width: 375px;
+padding: 0;
+width: 85%;
 height: 300px;
-display: inline-block;
-position:relative;
+display: block;
 overflow-y: auto;
-overflow-x: hidden;
-}
-#li-vid {
-display: inline-block;
-left: -40px;
-width: 375px;
-padding-right: 20px
 }
 nav {
 box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -189,4 +182,32 @@ text-align: center
 }
 #comment-img {
   max-width: 75%;
+}
+#slideshow-well {
+  margin-left: auto;
+  margin-right: auto;
+  height: 275px;
+  width: 225px;
+  padding: 5px;
+}
+#myCarousel {
+  top: 3%;
+  height: 250px;
+  width: 200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.item {
+  height: 250px;
+  width: 200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.nav-tabs {
+  width: 90%
+}
+#video-well {
+  padding: 10px;
+  width: 85%;
+  right: 50%
 }

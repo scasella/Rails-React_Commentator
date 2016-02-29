@@ -18,7 +18,17 @@ var player;
  </script>
 <div class="col-md-12">
   <div id="center_contents_div" class="col-md-5">
-    <%= react_component('LiveVideos', {:presenter => @videoPresenter.to_json, :imgSrc => image_path("ElisePlusStephen.jpg")}) %>
+    <%= react_component('LiveVideos', {:presenter => @videoPresenter.to_json, :imgSrc => image_path("ElisePlusStephen.jpg"),
+      :k1 => image_path("k1.jpg"),
+      :k2 => image_path("k2.jpg"),
+      :k3 => image_path("k3.jpg"),
+      :k4 => image_path("k4.jpg"),
+      :k5 => image_path("k5.jpg"),
+      :k6 => image_path("k6.jpg"),
+      :k7 => image_path("k7.jpg"),
+      :k8 => image_path("k8.jpg"),
+      :k9 => image_path("k9.jpg"),
+      :k10 => image_path("k10.jpg")}) %>
   </div>
 
   <%= react_component('App', {:presenter => @presenter.to_json, :elisePic => image_path("elisePic.jpg"), :stephenPic => image_path("stephenPic.jpg")}) %>
